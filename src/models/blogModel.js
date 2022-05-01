@@ -19,14 +19,16 @@ const blogSchema = new mongoose.Schema({
         type: [String]
     },
     category: {
-        type: [String],
+        type: String,
+        trim: true,
         required: true,   
     },
     subcategory: {
-        type:[String]
+        type:[String],
+
     },
 
-    deletedAt: String,
+    deletedAt: Date,
 
     isDeleted: { 
         type: Boolean, 
@@ -34,7 +36,7 @@ const blogSchema = new mongoose.Schema({
     },
 
 
-    publishedAt: String,
+    publishedAt: Date,
 
     isPublished: {
         type:Boolean,

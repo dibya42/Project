@@ -9,10 +9,7 @@ const check = function(x) {
     return x.every(i => (typeof i === "string"));
 }
 
-
-
 const createBlog = async function (req , res) {
-
     
     try {
         
@@ -88,7 +85,6 @@ const createBlog = async function (req , res) {
         
         let blog = await blogModel.create(data)
         res.status(201).send({status: true , data: blog})
-        
            
     } 
     catch (err) {
@@ -102,13 +98,16 @@ const createBlog = async function (req , res) {
 const getBlogs = async function (req , res) {
     try{
         
-        
         let queryData = req.query
 
         if (Object.keys(queryData).length == 0) { 
-            return res.status(400).send({ status: false, msg: "Invalid request !! Please Provide Blog Details"})
-          }
 
+            let blogInfo = await blogModel.find()
+            if(!blogInfo){
+                return res.status(404).send({status: false , msg:"Document not found"})
+            }
+            return res.status(200).send({status: true , data:blogInfo})
+          }
         if(!(queryData.authorId || queryData.category || queryData.tags || queryData.subcategory ) ){
             return res.status(400).send( {status: false , msg: "Invalid Filters"})
         }

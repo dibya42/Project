@@ -56,16 +56,7 @@ const createAuthor = async function (req , res) {
         let author = await authorModel.create(data)
         res.status(201).send({status: true , msg:"Author Created Successfully" , data: author})
 
-        //second method for email validation using email validator
-
-        // if(validator.validate(data.email)){
-        //     let author = await authorModel.create(data)
-        //     res.status(201).send({status: true , data: author})
-        // }
-        // else{
-        //     res.status(400).send({status: false , msg: "Invalid EmailId"})
-        // }
-           
+     
     } catch (err) {
         
         res.status(500).send({status: false , error: err.message})
